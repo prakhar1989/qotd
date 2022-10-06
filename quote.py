@@ -35,6 +35,7 @@ def generate_img(text):
         image_editable.text((x,y_offset), line, (237, 230, 211), font=title_font)
         y_offset += line_h
     img.save("result.jpg")
+    print("generated result.jpg")
 
 
 def get_quote():
