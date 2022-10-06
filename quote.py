@@ -6,6 +6,7 @@ import json
 import requests
 import textwrap
 
+image_backdrops = ['landscape', 'nature', 'stars', 'mountains']
 canned_seeds = []
 title_font = ImageFont.truetype('lato.ttf', 48)
 
@@ -14,7 +15,8 @@ with open('seeds.txt') as f:
     canned_seeds = [line.rstrip('\n') for line in f]
 
 def download_img():
-    response = requests.get("https://source.unsplash.com/random/800×800/?landscape", stream=True)
+    backdrop = choice(image_backdrops)
+    response = requests.get("https://source.unsplash.com/random/800×800/?"+ backdrop, stream=True)
     with open('img.png', 'wb') as out_file:
         shutil.copyfileobj(response.raw, out_file)
     del response
@@ -22,14 +24,16 @@ def download_img():
 
 def generate_img(text):
     img = Image.open("img.png")
-    w, h = img.size
+    width, height = img.size
     image_editable = ImageDraw.Draw(img)
-    y_offset = h/2
-    for line in textwrap.wrap(text, width=40):
-        length = title_font.getbbox(line)[2]
-        x = (w - length)/2
+    lines = textwrap.wrap(text, width=40)
+    line_count = len(lines)
+    y_offset = height/2 - (line_count/2 * title_font.getbbox(lines[0])[3])
+    for line in lines:
+        (_, _, line_w, line_h) = title_font.getbbox(line)
+        x = (width - line_w)/2
         image_editable.text((x,y_offset), line, (237, 230, 211), font=title_font)
-        y_offset += title_font.getbbox(line)[3]
+        y_offset += line_h
     img.save("result.jpg")
 
 
