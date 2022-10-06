@@ -6,10 +6,12 @@ import json
 import requests
 import textwrap
 
-canned_seeds = ["Opportunities", "When in doubt",
-        "Always remember", "Today is", "Never forget", "It is okay to"]
-
+canned_seeds = []
 title_font = ImageFont.truetype('lato.ttf', 48)
+
+# read seeds from file
+with open('seeds.txt') as f:
+    canned_seeds = [line.rstrip('\n') for line in f]
 
 def download_img():
     response = requests.get("https://source.unsplash.com/random/800×800/?landscape", stream=True)
