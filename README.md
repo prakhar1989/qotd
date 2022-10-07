@@ -28,3 +28,7 @@ python quote.py
 ```
 
 This generates an img: `result.jpg` which is the final output
+
+## Samples
+
+Checkout some samples in the `samples/` folder
