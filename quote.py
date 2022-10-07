@@ -1,4 +1,5 @@
 from PIL import Image, ImageFont, ImageDraw 
+from time import time
 from random import choice
 from datetime import datetime
 import shutil
@@ -46,8 +47,10 @@ def generate_img(text):
         x = (width - line_w)/2
         image_editable.text((x,y_offset), line, (237, 230, 211), font=title_font)
         y_offset += line_h
-    img.save("result.jpg")
-    print("generated result.jpg")
+    filename = "{}.jpg".format(round(time()))
+    img.save(filename)
+    print("generated " + filename)
+    return filename
 
 def upload_img(filename):
     print("Uploading image")
@@ -88,6 +91,6 @@ def send_courier(image_url):
 
 quote = get_quote()
 download_img()
-generate_img(quote)
-img_url = upload_img("result.jpg")
+filename = generate_img(quote)
+img_url = upload_img(filename)
 send_courier(img_url)

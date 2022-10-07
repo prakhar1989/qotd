@@ -1,5 +1,4 @@
 .vscode/
 img.png
 serviceaccount.json
-result.jpg
-
+*.jpg
