@@ -163,16 +163,63 @@ return filename
 This generates the final image called `result.jpg`
 
 ### Step 4: Uploading the image
+For the penultimate step, we need to upload the image so that we can use that with Courier. In this case, I'm using Firebase Storage but you can feel free to use whatever you like.
 
+```py
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import storage
 
+cred = credentials.Certificate('serviceaccount.json')
+firebase_admin.initialize_app(cred, {...})
+
+bucket = storage.bucket()
+blob = bucket.blob(filename)
+blob.upload_from_filename(filename)
+blob.make_public()
+return blob.public_url
+```
 
 ## Using Courier
 
+Finally, we have everything we need to start sending our awesome quotes to our friends and family. We can use Courier to create a good looking email template.
+
 ### Creating the template on courier
+
+TODO: Add screenshot of template
 
 ### Sending the message
 
-## Ideas for improvement
+Sending a message with Courier is as easy it gets. While courier has its own SDKs that can make integration easy, I prefer using their API endpoint to keep things simple. With my `AUTH_TOKEN` and `TEMPLATE_ID` in hand, we can use the following piece of code to send our image
+
+```py
+import requests
+
+headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {}".format(os.environ['COURIER_AUTH_TOKEN'])
+}
+message={
+    "to": { "email": os.environ["COURIER_RECIPIENT"] },
+    "data": {
+        "date": datetime.today().strftime("%B %d, %Y"),
+        "img": image_url ## this is image url we generated earlier
+    },
+    "routing": {
+        "method": "single",
+        "channels": [
+            "email"
+        ]
+    },
+    "template": os.environ["COURIER_TEMPLATE"]
+}
+requests.post("https://api.courier.com/send", json={"message": message}, headers=headers)
+```
+
+And that's it!
+
+## Conclusion & Ideas for improvement
 Better background image
 Better background colour for the text
 Better layout algorithm?
