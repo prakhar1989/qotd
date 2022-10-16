@@ -220,8 +220,12 @@ requests.post("https://api.courier.com/send", json={"message": message}, headers
 And that's it!
 
 ## Conclusion & Ideas for improvement
-Better background image
-Better background colour for the text
-Better layout algorithm?
-Adding more channels    
+
+This blog post demonstrated how easy it is to get started with machine learning & Courier.
+
+If you want to go ahead and improve this project, here are some interesting ideas to try
+
+- Better background image: Use a term from the generated quote to search for an image?
+- Better background colour for the text: Use better colors for the text. One cool idea is to use the complimentary color from the image's main color. You can use k-means clustering to find that out.
+- Adding more channels : Extends this to messages on messaging clients and sms!
 
