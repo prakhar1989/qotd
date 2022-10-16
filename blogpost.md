@@ -4,6 +4,9 @@ Motivational quotes were rage back in the day with MMS & email forwards were a t
 
 Inspired by the same idea, today we are going to build a service that sends our friends and family an AI generated motivational quote of the day. Rather than hardcoding a list of motivational quotes, we are going to use a machine learning model to generate a quote on demand. That way we know that we'll never run out of quotes to share!
 
+![what we will build](samples/email.png)
+
+
 ## Using AI to generate motivational quotes
 
 ### OpenGPT2 and Language Models
@@ -113,8 +116,6 @@ return resp.json()["text"]
 ### Step 2: Downloading the background image
 
 The first of the challenge is getting a beautiful background image for our quote. For that, we'll use the unplash API that provides a nice endpoint to return a random image matching a query. Opening https://source.unsplash.com/random/800×800/?nature in our browser returns a nice nature image. 
-
-![unsplash](https://source.unsplash.com/random/300/?nature)
 
 To keep things interesting, we can use different query terms such as stars, etc. Here's the how the code for downloading our background image looks like - 
 
