@@ -46,7 +46,7 @@ Now that we have a way to generate quotes for us, we have to think about how we 
 
 A key plus point of the second option is that once the model is loaded the API can respond to us quickly and can be used in other applications as well. FWIW, the first option is a totally valid approach as well.
 
-We can use [FastAPI]() to build a quick serving API. Here's what that looks like
+We can use [FastAPI](https://fastapi.tiangolo.com/) to build a quick serving API. Here's what that looks like
 
 ```python
 
@@ -91,7 +91,7 @@ INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 
 Now we can start sending requests to the `/generate` endpoint that will generate a quote for us.
 
-TODO: Add screenshot of fastapi
+![fastapi](https://i.imgur.com/YLZH1Dk.png)
 
 ## Building the Quote Generator
 
@@ -112,7 +112,11 @@ return resp.json()["text"]
 
 ### Step 2: Downloading the background image
 
-The first of the challenge is getting a beautiful background image for our quote. For that, we'll use the unplash API that provides a nice endpoint to return a random image matching a query. Opening https://source.unsplash.com/random/800×800/nature in our browser returns a nice nature image. To keep things interesting, we can use different query terms such as stars, etc. Here's the how the code for downloading our background image looks like - 
+The first of the challenge is getting a beautiful background image for our quote. For that, we'll use the unplash API that provides a nice endpoint to return a random image matching a query. Opening https://source.unsplash.com/random/800×800/?nature in our browser returns a nice nature image. 
+
+![unsplash](https://source.unsplash.com/random/300/?nature)
+
+To keep things interesting, we can use different query terms such as stars, etc. Here's the how the code for downloading our background image looks like - 
 
 ```py
 from random import choice
@@ -186,7 +190,7 @@ Finally, we have everything we need to start sending our awesome quotes to our f
 
 ### Creating the template on courier
 
-TODO: Add screenshot of template
+![img](https://i.imgur.com/0Ktbw0E.png)
 
 ### Sending the message
 
